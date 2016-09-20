@@ -41,6 +41,12 @@ void DestroyList(LinkList **L) {
 	(*p)->next = NULL;
 	(*p)->data = NULL;
 }
+//重置为空表 OK
+void ClearList(LinkList **L) {
+	DestroyList(L);
+	InitList(L);
+	return;
+}
 //判断线性表是否为空 OK
 int ListEmpty(LinkList *L) {
 	return(L == NULL||L->next == NULL);
@@ -173,6 +179,24 @@ int ListDelete(LinkList **L, int i, ElemType *e) {
 	free(p);
 	return 1;
 }
+//访问函数 OK
+int visit(ElemType *p) {
+	if (sizeof(p) == sizeof(ElemType))return 1;
+	else return 0;
+	//return 0;
+}
+//是否可访问 OK
+int ListTraverse(LinkList *L, int(*visit)(ElemType *e)) {
+	LinkList *p = L;
+	if (p != NULL) {
+		while (p->next != NULL) {
+			if (!visit(&(p->data)))return 0;
+			p = p->next;
+		}
+		if (!visit(&(p->data)))return 0;
+	}
+	return 1;
+}
 //归并排序 OK
 void MergeList(LinkList *La, LinkList *Lb, LinkList **Lc) {
 	InitList(Lc);
@@ -234,6 +258,7 @@ int main()
 	MergeList(LA, LB, &LC);
 	printf("归并后：");
 	GetAllList(LC);
+	ListTraverse(LC, visit);
 	//增加
 	printf("增加后：");
 	Add(LC, 30);
