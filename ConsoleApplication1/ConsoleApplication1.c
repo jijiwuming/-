@@ -20,12 +20,13 @@ void InitList(LinkList **L) {
 void Add(LinkList* L, ElemType e) {
 	LinkList *newnode = (LinkList *)malloc(sizeof(LinkList));
 	LinkList *p = L;
-	while (p->next != NULL) {
+	while (p!=NULL&&p->next != NULL) {
 		p = p->next;
 	}
 	p->next = newnode;
 	newnode->data = e;
 	newnode->next = NULL;
+	return;
 }
 //销毁线性表 OK
 void DestroyList(LinkList **L) {
@@ -144,7 +145,7 @@ int ListInsert(LinkList** L, int i, ElemType e) {
 	}
 	LinkList *k = (LinkList *)malloc(sizeof(LinkList));
 	k->data = e;
-	if (m!=nullptr) {
+	if (m!=NULL) {
 		m->next = k;
 	}
 	k->next = p;
@@ -161,18 +162,18 @@ int ListDelete(LinkList **L, int i, ElemType *e) {
 	LinkList* m = NULL;
 	for (; j<(i - 1); j++) {
 		m = p;
-		if (p->next != NULL)p = p->next;
+		if (p!=NULL&&p->next != NULL)p = p->next;
 		else return 0;
 	}
 	*e = p->data;
-	if (m!= nullptr) {
+	if (m!= NULL) {
 		m->next = p->next;
 	}
 	else *L = p->next;
 	free(p);
 	return 1;
 }
-//归并排序 
+//归并排序 OK
 void MergeList(LinkList *La, LinkList *Lb, LinkList **Lc) {
 	InitList(Lc);
 	int i = 1, j = 1, k = 0, La_Len = ListLength(La), Lb_Len = ListLength(Lb);
@@ -190,11 +191,22 @@ void MergeList(LinkList *La, LinkList *Lb, LinkList **Lc) {
 	while (j <= Lb_Len) {
 		GetElem(Lb, j++, bj); ListInsert(Lc, ++k, *bj);
 	}
+	ElemType e=-1;
+	ListDelete(Lc, ListLength(*Lc), &e);
 	free(ai);
 	free(bj);
 	return;
 }
-
+//遍历输出 OK
+void GetAllList(LinkList *p) {
+	while (p != NULL&&p->next != NULL) {
+		printf("%d ", p->data);
+		p = p->next;
+	}
+	if(p != NULL)printf("%d ", p->data);
+	printf("\n");
+	return;
+}
 int main()
 {
 	//初始化的p必须指向NULL
@@ -220,7 +232,31 @@ int main()
 	ListDelete(&LB, 1, &e);
 
 	MergeList(LA, LB, &LC);
-
+	printf("归并后：");
+	GetAllList(LC);
+	//增加
+	printf("增加后：");
+	Add(LC, 30);
+	GetAllList(LC);
+	//删除
+	ListDelete(&LC, ListLength(LC), &e);
+	printf("删除后：");
+	GetAllList(LC);
+	//查找
+	//1.通过索引
+	int i = 2;
+	GetElem(LC, i, &e);
+	printf("1.查找第二位：%d\n", e);
+	//2.通过值查找第一个符合项
+	int index = LocateElem(LC, e, compare);
+	GetElem(LC, index, &e);
+	printf("2.查找第二位：%d\n", e);
+	//修改
+	int j = 1;
+	ListDelete(&LC, j, &e);
+	ListInsert(&LC, j, 1024);
+	printf("修改1位后：");
+	GetAllList(LC);
 
 	system("pause");
 	return 0;

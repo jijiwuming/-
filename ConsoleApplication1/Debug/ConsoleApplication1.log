@@ -1,3 +1,8 @@
-﻿  ConsoleApplication1.cpp
-  ConsoleApplication1.vcxproj -> E:\project\ConsoleApplication1\Debug\ConsoleApplication1.exe
-  ConsoleApplication1.vcxproj -> E:\project\ConsoleApplication1\Debug\ConsoleApplication1.pdb (Partial PDB)
+﻿  ConsoleApplication1.c
+c:\users\10202\desktop\linklist-listnode\consoleapplication1\consoleapplication1.c(15): warning C4047: “=”:“ElemType”与“void *”的间接级别不同
+c:\users\10202\desktop\linklist-listnode\consoleapplication1\consoleapplication1.c(42): warning C4047: “=”:“ElemType”与“void *”的间接级别不同
+c:\users\10202\desktop\linklist-listnode\consoleapplication1\consoleapplication1.c(50): warning C4047: “==”:“ElemType”与“void *”的间接级别不同
+c:\users\10202\desktop\linklist-listnode\consoleapplication1\consoleapplication1.c(61): warning C4047: “=”:“ElemType”与“void *”的间接级别不同
+c:\users\10202\desktop\linklist-listnode\consoleapplication1\consoleapplication1.c(69): warning C4047: “=”:“ElemType”与“void *”的间接级别不同
+  ConsoleApplication1.vcxproj -> C:\Users\10202\Desktop\LinkList-ListNode\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> C:\Users\10202\Desktop\LinkList-ListNode\Debug\ConsoleApplication1.pdb (Partial PDB)
